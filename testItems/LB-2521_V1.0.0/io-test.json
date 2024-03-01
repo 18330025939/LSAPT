@@ -1,0 +1,15 @@
+{
+    "editTestInstr": "io-test 1",
+    "editTestName": "io-test",
+    "editTimeOut": "1",
+    "editImgPath": "",
+    "editShowInfo": "io-test 2",
+    "editPassText": "pass",
+    "editFailText": "fail",
+    "editRetryText": "",
+    "chkBoxPdtDel": true,
+    "chkBoxErrCtn": false,
+    "chkBoxArtPart": false,
+    "rdoBtnSkipTest": false,
+    "rdoBtnOnlyTest": true
+}

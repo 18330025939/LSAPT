@@ -1,0 +1,19 @@
+{
+    "editHwPlatform": "LB-2521",
+    "editHwVersion": "V1.0.0",
+    "editHwMode": "DEBUG",
+    "system": {
+        "editSysLogin": "",
+        "editSysPassword": "",
+        "editSysStartTimeout": "",
+        "chkSysAvoidLogin": false,
+        "editSysVersion": ""
+    },
+    "ftpServer": {
+        "editFtpHost": "",
+        "editFtpPort": "",
+        "editFtpUserName": "",
+        "editFtpPassword": "",
+        "editFtpPath": ""
+    }
+}

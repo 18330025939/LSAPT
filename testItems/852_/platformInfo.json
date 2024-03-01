@@ -1,0 +1,19 @@
+{
+    "editHwPlatform": "852",
+    "editHwVersion": "",
+    "editHwMode": "",
+    "system": {
+        "editSysLogin": "",
+        "editSysPassword": "",
+        "editSysStartTimeout": "",
+        "chkSysAvoidLogin": false,
+        "editSysVersion": ""
+    },
+    "ftpServer": {
+        "editFtpHost": "",
+        "editFtpPort": "",
+        "editFtpUserName": "",
+        "editFtpPassword": "",
+        "editFtpPath": ""
+    }
+}

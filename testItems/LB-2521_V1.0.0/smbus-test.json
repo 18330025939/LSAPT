@@ -1,0 +1,15 @@
+{
+    "editTestInstr": "smbus-test 1",
+    "editTestName": "smbus-test",
+    "editTimeOut": "",
+    "editImgPath": "",
+    "editShowInfo": "smbus-test 2",
+    "editPassText": "pass",
+    "editFailText": "fail",
+    "editRetryText": "",
+    "chkBoxPdtDel": true,
+    "chkBoxErrCtn": false,
+    "chkBoxArtPart": false,
+    "rdoBtnSkipTest": false,
+    "rdoBtnOnlyTest": true
+}

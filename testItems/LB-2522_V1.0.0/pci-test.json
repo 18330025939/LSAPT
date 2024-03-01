@@ -1,0 +1,15 @@
+{
+    "editTestInstr": "pci-test 1",
+    "editTestName": "pci-test",
+    "editTimeOut": "1",
+    "editImgPath": "",
+    "editShowInfo": "pci-test 2",
+    "editPassText": "pass",
+    "editFailText": "fail",
+    "editRetryText": "",
+    "chkBoxPdtDel": true,
+    "chkBoxErrCtn": false,
+    "chkBoxArtPart": false,
+    "rdoBtnSkipTest": false,
+    "rdoBtnOnlyTest": true
+}

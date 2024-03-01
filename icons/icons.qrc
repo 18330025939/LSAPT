@@ -1,0 +1,13 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>connect.png</file>
+    <file>open1.png</file>
+    <file>save1.png</file>
+    <file>export.png</file>
+    <file>import.png</file>
+    <file>open.png</file>
+    <file>left.png</file>
+    <file>right.png</file>
+    <file>save.png</file>
+  </qresource>
+</RCC>

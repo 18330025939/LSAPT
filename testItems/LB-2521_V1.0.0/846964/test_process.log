@@ -1,0 +1,20 @@
+Sent data:
+io-test 1
+Received data:
+io-test 2
+Sent data:
+led-test 1
+Received data:
+led-test 2
+Sent data:
+smbus-test 1
+Received data:
+smbus-test 2 pass
+Sent data:
+pci-test 1
+Received data:
+pci-test 3 pass
+Sent data:
+usb-test 1
+Received data:
+usb-test 2 pass

@@ -1,0 +1,15 @@
+{
+    "editTestInstr": "led-test 1",
+    "editTestName": "led-test",
+    "editTimeOut": "",
+    "editImgPath": "C:\\Users\\91558\\Desktop\\8510099.jpg",
+    "editShowInfo": "led-test 2",
+    "editPassText": "pass",
+    "editFailText": "fail",
+    "editRetryText": "",
+    "chkBoxPdtDel": true,
+    "chkBoxErrCtn": false,
+    "chkBoxArtPart": false,
+    "rdoBtnSkipTest": false,
+    "rdoBtnOnlyTest": true
+}
