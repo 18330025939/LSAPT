@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QObject, pyqtSignal, QTimer, pyqtSlot, QByteArray, QIODevice
+from PyQt5.QtCore import QObject, pyqtSignal, QTimer, pyqtSlot, QByteArray, QIODevice, QThread
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 
 
@@ -46,26 +46,19 @@ class SerialPort(QObject):
         else:
             return False
 
-    # @pyqtSlot()
-    def command_timeout_handler(self):
-        if self.serial_port.isOpen():
-            print('timeout')
-            self.data_received.emit('Timeout')
-            self.timer.stop()
-
-    # def pause(self):
-    #     self.is_paused = True
-    #
-    # def resume(self):
-    #     self.is_paused = False
-
     def send_command(self, command, timeout):
         if self.serial_port.isOpen():
             # print('command', QByteArray(command.encode()))
             self.serial_port.write(QByteArray(command.encode()))
             self.serial_port.waitForBytesWritten(1000)
-            # if int(timeout) > 0:
-            #     self.timer.start(int(timeout) * 1000)
+            if int(timeout) > 0:
+                self.timer.start(int(timeout) * 1000)
+
+    @pyqtSlot()
+    def command_timeout_handler(self):
+        self.timer.stop()
+        if self.serial_port.isOpen():
+            self.data_received.emit('Timeout')
 
     def handle_serial_data(self):
         if self.serial_port.isOpen():

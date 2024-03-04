@@ -35,6 +35,8 @@ class TableWidgetIO:
 
             for row, row_data in enumerate(data):
                 for column, (header, value) in enumerate(row_data.items()):
+                    if header != 'Level' and header != '测试项名称':
+                        return 0
                     item = QTableWidgetItem(value)
                     item.setFlags(item.flags() ^ Qt.ItemIsEditable)
                     table_widget.setItem(row, column, item)
@@ -121,7 +123,7 @@ class ConfigItems(QTableWidget):
             self.delete_test_item(test_name)
 
     def clicked_item(self, row, col):
-        print(row, col)
+        # print(row, col)
         self.row = row
         self.col = col
         # UI.logger.log_debug(row, col, self.index, self.table.rowCount())
@@ -178,7 +180,7 @@ class ConfigItems(QTableWidget):
             for col in range(self.table.columnCount()):
                 column_attribute = self.table.horizontalHeaderItem(col).text()
                 if column_attribute in data:
-                    print(column_attribute, data[column_attribute])
+                    # print(column_attribute, data[column_attribute])
                     new_item = QTableWidgetItem(data[column_attribute])
                     self.table.setItem(current_row, col, new_item)
 
@@ -205,7 +207,7 @@ class ConfigItems(QTableWidget):
         dialog = QFileDialog()
         export_dir = os.path.join(self.current_dir, table_dir)
         dialog.setDirectory(export_dir)
-        file_path, _ = dialog.getSaveFileName(self, "导出文件", "", "JSON Files (*.json)")
+        file_path, _ = dialog.getSaveFileName(self, "导出文件", UI.testItemsPlatFile, "JSON Files (*.json)")
         # print(file_path)
         if file_path:
             TableWidgetIO.export_table_widget(self.table, file_path)
@@ -226,9 +228,11 @@ class ConfigItems(QTableWidget):
     def import_table(self):
         dialog = QFileDialog()
         dialog.setDirectory(self.current_dir)
-        file_path, _ = dialog.getOpenFileName(None, "导入文件", "", "JSON Files (*.json)")
+        file_path, _ = dialog.getOpenFileName(None, "导入文件", "", "JSON Files (" + UI.testItemsPlatFile + ")")
         if file_path:
-            TableWidgetIO.import_table_widget(self.table, file_path)
+            rows = TableWidgetIO.import_table_widget(self.table, file_path)
+            if not rows:
+                return None
             self.current_dir = os.path.dirname(file_path)
             return self.current_dir
 
@@ -244,6 +248,8 @@ class TestItems(QTableWidget):
     def set_item(self, row, col, value):
         item = QTableWidgetItem(value)
         self.table.setItem(row, col, item)
+        self.table.show()
+        # self.table.repaint()
 
     def get_current_row(self):
         return self.table.currentRow()

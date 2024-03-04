@@ -1,5 +1,4 @@
 import os.path
-from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox
 from MultiConfig.ui_multiConfig import Ui_MultiConfig
 from Lib.module import ModuleLib
@@ -151,6 +150,12 @@ class MultiConfigWindow(QWidget):
             file_path = os.path.join(current_path, UI.platformInfoFile)
             if os.path.exists(file_path):
                 UI.platWin.set_platform_info(file_path)
+        else:
+            mes_box = QMessageBox()
+            mes_box.setIcon(QMessageBox.Warning)
+            mes_box.setText("文件打开失败，请检查文件格式或内容！")
+            mes_box.setWindowTitle('警告')
+            mes_box.exec_()
 
     def export_table_to_file(self):
         if UI.platWin is None or UI.platWin.get_hw_plat_info() is None:

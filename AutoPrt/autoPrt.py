@@ -1,3 +1,5 @@
+import threading
+
 from PyQt5.QtWidgets import QMainWindow, QWidget
 from AutoPrt.ui_autoPrt import Ui_AutoPrt
 from MultiConfig.multiConfig import MultiConfigWindow
@@ -11,6 +13,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_AutoPrt()
         self.ui.setupUi(self)
 
+        # self.closeEvent = self.on_close()
         self.ui.actMultiConfig.triggered.connect(self.act_multi_config)
         self.ui.actMultiTest.triggered.connect(self.act_multi_test)
         self.ui.actPlatformConfig.triggered.connect(self.act_platform_config)

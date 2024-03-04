@@ -96,6 +96,10 @@ class PlatConfigWindow(QWidget):
                     self.ui.editHwMode.setText(value)
                 elif key == self.get_hw_version_object_name():
                     self.ui.editHwVersion.setText(value)
+                elif key == 'ftpServer':
+                    for k, v in value.items():
+                        if k == self.get_ftp_path_object_name():
+                            self.ui.editFtpPath.setText(v)
 
     def get_hw_platform_object_name(self):
         return self.ui.editHwPlatform.objectName()
@@ -105,3 +109,6 @@ class PlatConfigWindow(QWidget):
 
     def get_hw_mode_object_name(self):
         return self.ui.editHwMode.objectName()
+
+    def get_ftp_path_object_name(self):
+        return self.ui.editFtpPath.objectName()

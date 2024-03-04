@@ -4,7 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccdba8c2-3479-4c83-894c-40547abcd70a" name="Changes" comment="" />
+    <list default="true" id="ccdba8c2-3479-4c83-894c-40547abcd70a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutoPrt/autoPrt.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoPrt/autoPrt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lib/console.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lib/console.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lib/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lib/item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lib/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lib/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lib/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lib/ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MultiConfig/multiConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/MultiConfig/multiConfig.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MultiTest/multiTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/MultiTest/multiTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlatConfig/platConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlatConfig/platConfig.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/852_/platformInfo.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/111222/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/123147/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/123147/test_result.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/12345678901234561234567890123456/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/12345678901234561234567890123456/test_result.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/456789/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/555444/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/555444/test_result.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/666444/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/666444/test_result.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/753951/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/777666/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/789456/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/789456/test_result.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/846964/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/846964/test_result.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/888999/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/951753/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/963852/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/963852/test_result.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/9638527410123456963852741012345/test_result.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/96385274101234569638527410123456/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/98765432101234569876543210123456/test_process.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/98765432101234569876543210123456/test_result.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/LB-2521_V1.0.0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/io-test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/led-test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/pci-test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/platformInfo.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/smbus-test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2521_V1.0.0/usb-test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2522_V1.0.0/LB-2522_V1.0.0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2522_V1.0.0/led-test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2522_V1.0.0/pci-test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2522_V1.0.0/serial-test.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testItems/LB-2522_V1.0.0/smbus-test.json" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +65,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Lib/item.py" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -28,32 +79,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.createJson.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.multiConfig.executor&quot;: &quot;Run&quot;,
-    &quot;Python.para.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ui.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;G:/work/MlituConfig_win/LSAPT&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.config.executor": "Run",
+    "Python.createJson.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.multiConfig.executor": "Run",
+    "Python.para.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.ui.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "G:/work/MlituConfig_win/LSAPT",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\work\MlituConfig_win\LSAPT\PlatConfig" />
@@ -237,12 +290,23 @@
       <workItem from="1708388939001" duration="35410000" />
       <workItem from="1709082848729" duration="14629000" />
       <workItem from="1709187060796" duration="13166000" />
-      <workItem from="1709200260919" duration="8455000" />
+      <workItem from="1709200260919" duration="32313000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -266,13 +330,13 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ui_multiConfig_ui$main.coverage" NAME="main Coverage Results" MODIFIED="1709213694502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ui_multiConfig_ui$main.coverage" NAME="main Coverage Results" MODIFIED="1709546900305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MlituConfig$main.coverage" NAME="main Coverage Results" MODIFIED="1704384496440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LSAPT$main.coverage" NAME="main Coverage Results" MODIFIED="1706077688711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LSAPT$multiConfig.coverage" NAME="multiConfig Coverage Results" MODIFIED="1704870297386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MultiConfig" />
     <SUITE FILE_PATH="coverage/ui_multiConfig_ui$para.coverage" NAME="para Coverage Results" MODIFIED="1707111823121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lib" />
     <SUITE FILE_PATH="coverage/LSAPT$config.coverage" NAME="config Coverage Results" MODIFIED="1704808184829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MultiConfig" />
-    <SUITE FILE_PATH="coverage/ui_multiConfig_ui$test.coverage" NAME="test Coverage Results" MODIFIED="1708401587896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lib" />
+    <SUITE FILE_PATH="coverage/ui_multiConfig_ui$test.coverage" NAME="test Coverage Results" MODIFIED="1709520557808" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lib" />
     <SUITE FILE_PATH="coverage/LSAPT$ui.coverage" NAME="ui Coverage Results" MODIFIED="1705653973877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lib" />
     <SUITE FILE_PATH="coverage/LSAPT$createJson.coverage" NAME="createJson Coverage Results" MODIFIED="1704867640620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MultiConfig" />
   </component>

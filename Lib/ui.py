@@ -13,7 +13,8 @@ class UI:
     testItemsDir = 'testItems'
     testItemsTempDir = 'temp'
     platformInfoFile = 'platformInfo.json'
-    testItemsTempFile = 'tempItem.json'
+    testItemsTempFile = 'tempItems.json'
+    testItemsPlatFile = 'platItems.json'
 
     testProcessLog = 'test_process.log'
     testResultLog = 'test_result.log'

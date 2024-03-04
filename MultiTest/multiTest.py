@@ -1,8 +1,8 @@
 import json
 import datetime
 import os
+import shutil
 import threading
-import time
 
 from PyQt5.QtGui import QPixmap, QColor
 from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox
@@ -16,6 +16,7 @@ from PyQt5.QtCore import Qt, pyqtSignal, QEventLoop, QTimer
 
 class MultiTestWindow(QWidget):
     notify_signal = pyqtSignal(str)
+
     def __init__(self, form):
         super().__init__()
         self.form = form
@@ -34,6 +35,9 @@ class MultiTestWindow(QWidget):
         self.test_timeout = None
         self.test_skip = None
 
+        self.platform_name = None
+        self.dst_dir = None
+
         self.test_log = TestLogger()
         self.test_progress_log = TestLogger()
 
@@ -47,6 +51,8 @@ class MultiTestWindow(QWidget):
 
         self.time = QTimer()
         self.time.timeout.connect(self.thread_finished)
+        # self.timer = QTimer()
+        # self.timer.timeout.connect(self.command_timeout)
 
         self.current_row = 0
         self.rows = 0
@@ -96,16 +102,16 @@ class MultiTestWindow(QWidget):
 
     def handle_test_result(self, message):
         # received_data = f'Received data: {message}'
-        # print('message', message)
         self.test_progress_log.add_data('Received data:')
         self.test_progress_log.add_data(message)
         current_time = datetime.datetime.now().time().strftime('%H:%M:%S')
         self.testTable.set_item(self.current_row, self.testTable_header.index('EndTime'), current_time)
         if os.path.exists(self.test_image_path) and os.path.isfile(self.test_image_path):
-            if self.set_label_image(self.test_image_path):
-                message = self.show_info
+            if not self.set_label_image(self.test_image_path):
+                self.show_info = '不通过'
+            else:
+                self.show_info = message
             self.ui.labelImage.setText("无照片")
-
         if self.show_info in message:
             self.testTable.set_item(self.current_row, self.testTable_header.index('Result'), "Passed")
             self.testTable.set_item(self.current_row, self.testTable_header.index('Msg'), self.test_passed)
@@ -140,7 +146,10 @@ class MultiTestWindow(QWidget):
                 self.ui.labelSkipNumber.setText(str(int(self.ui.labelSkipNumber.text()) + 1))
                 continue
             # print(self.test_instr, self.test_timeout)
-            self.serial.send_command(self.test_instr, self.test_timeout)#先不考虑多行的测试指令
+            # 先不考虑多行的测试指令
+            self.serial.send_command(self.test_instr, self.test_timeout)
+            # if int(self.test_timeout) > 0:
+            #     self.timer.start(int(self.test_timeout) * 1000)
             self.handle_event.clear()
             self.testTable.set_item(self.current_row, self.testTable_header.index('Result'), 'Running')
             current_date = datetime.datetime.now().strftime('%Y/%m/%d')
@@ -148,7 +157,12 @@ class MultiTestWindow(QWidget):
             current_time = datetime.datetime.now().time().strftime('%H:%M:%S')
             self.testTable.set_item(self.current_row, self.testTable_header.index('StartTime'), current_time)
             self.handle_event.wait()
+            # self.timer.stop()
             self.current_row += 1
+
+    # def command_timeout(self):
+    #     print('timeout')
+    #     self.timer.stop()
 
     def set_sid_pid(self):
         self.ui.editSID.clear()
@@ -171,7 +185,7 @@ class MultiTestWindow(QWidget):
             mes_box.setIcon(QMessageBox.Information)
             mes_box.setText("测试完成，请进行下一步操作！")
             mes_box.setWindowTitle('提示')
-            mes_box.setStandardButtons(QMessageBox.Abort)#| QMessageBox.Cancel) | QMessageBox.NoButton)
+            mes_box.setStandardButtons(QMessageBox.Abort)
             continue_button = mes_box.addButton('继续', QMessageBox.YesRole)
             abort_button = mes_box.button(QMessageBox.Abort)
             abort_button.setText('中止')
@@ -203,7 +217,7 @@ class MultiTestWindow(QWidget):
 
     def retry_test(self):
         self.set_sid_pid()
-        new_dir = os.path.join(self.current_dir, self.ui.editSID.text() + self.ui.editOPID.text())
+        new_dir = os.path.join(self.current_dir, self.platform_name + '_' + self.ui.editSID.text())
         if not os.path.exists(new_dir):
             os.mkdir(new_dir)
         if os.path.exists(new_dir):
@@ -217,11 +231,14 @@ class MultiTestWindow(QWidget):
                     item = self.ui.tableWidget.item(row, col)
                     if item and item.text().strip():
                         item.setText('')
+            self.ui.labelTotalNumber.setText('0')
+            self.ui.labelSkipNumber.setText('0')
+            self.ui.labelPassNumber.setText('0')
+            self.ui.labelFailNumber.setText('0')
         self.thread_start()
-        # print('thread_start')
 
     def analysis_test_script(self, name):
-        file_path = os.path.join(self.current_dir, name + '.json')#.replace('\\', '/')
+        file_path = os.path.join(self.current_dir, name + '.json').replace('\\', '/')
         with open(file_path, 'r') as file:
             data = json.load(file)
 
@@ -248,9 +265,16 @@ class MultiTestWindow(QWidget):
         return True
 
     def open_test_file(self):
-        file_path, _ = QFileDialog().getOpenFileName(None, "打开文件", "", "JSON Files (*.json)")
+        file_path, _ = QFileDialog().getOpenFileName(None, "打开文件", "", "JSON Files (" + UI.testItemsPlatFile + ")")
         if file_path:
             self.rows = TableWidgetIO.import_table_widget(self.ui.tableWidget, file_path)
+            if not self.rows:
+                mes_box = QMessageBox()
+                mes_box.setIcon(QMessageBox.Warning)
+                mes_box.setText("文件打开失败，请检查文件格式或内容！")
+                mes_box.setWindowTitle('警告')
+                mes_box.exec_()
+                return False
             self.current_dir = os.path.dirname(file_path)
             self.table_file_path = file_path
             self.ui.labelTestFile.setText(os.path.basename(file_path))
@@ -264,29 +288,31 @@ class MultiTestWindow(QWidget):
                     data = json.load(file)
                 for key, value in data.items():
                     if key == UI.platWin.get_hw_platform_object_name():
+                        self.platform_name = value
                         self.ui.labelModel.setText(value)
                     elif key == UI.platWin.get_hw_version_object_name():
                         self.ui.labelVersion.setText(value)
                     elif key == UI.platWin.get_hw_mode_object_name():
                         self.ui.labelMode.setText(value)
-
-            # self.set_label_image('C:\Users\91558\Desktop')
-
+                    elif key == 'ftpServer':
+                        for k, v in value.items():
+                            if k == UI.platWin.get_ftp_path_object_name():
+                                self.dst_dir = v
     def save_test_parameters(self):
         if self.test_log is not None:
-            self.test_log.add_data(self.ui.labelModel.objectName() + '=' + self.ui.labelModel.text())
-            self.test_log.add_data(self.ui.labelTestFile.objectName() + '=' + self.ui.labelTestFile.text())
-            self.test_log.add_data(self.ui.labelVersion.objectName() + '=' + self.ui.labelVersion.text())
-            self.test_log.add_data(self.ui.labelMode.objectName() + '=' + self.ui.labelMode.text())
-            self.test_log.add_data(self.ui.editSID.objectName() + '=' + self.ui.editSID.text())
-            self.test_log.add_data(self.ui.editOPID.objectName() + '=' + self.ui.editOPID.text())
-            self.test_log.add_data(self.ui.labelTotalNumber.objectName() + '=' + self.ui.labelTotalNumber.text())
-            self.test_log.add_data(self.ui.labelPassNumber.objectName() + '=' + self.ui.labelPassNumber.text())
-            self.test_log.add_data(self.ui.labelFailNumber.objectName() + '=' + self.ui.labelFailNumber.text())
+            self.test_log.add_data(self.ui.labelModel.objectName().replace('label', '') + '=' + self.ui.labelModel.text())
+            self.test_log.add_data(self.ui.labelTestFile.objectName().replace('label', '') + '=' + self.ui.labelTestFile.text())
+            self.test_log.add_data(self.ui.labelVersion.objectName().replace('label', '') + '=' + self.ui.labelVersion.text())
+            self.test_log.add_data(self.ui.labelMode.objectName().replace('label', '') + '=' + self.ui.labelMode.text())
+            self.test_log.add_data(self.ui.editSID.objectName().replace('edit', '') + '=' + self.ui.editSID.text())
+            self.test_log.add_data(self.ui.editOPID.objectName().replace('edit', '') + '=' + self.ui.editOPID.text())
+            self.test_log.add_data(self.ui.labelTotalNumber.objectName().replace('label', '') + '=' + self.ui.labelTotalNumber.text())
+            self.test_log.add_data(self.ui.labelPassNumber.objectName().replace('label', '') + '=' + self.ui.labelPassNumber.text())
+            self.test_log.add_data(self.ui.labelFailNumber.objectName().replace('label', '') + '=' + self.ui.labelFailNumber.text())
             self.test_log.add_data(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
     def save_text_log(self):
-        new_dir = os.path.join(self.current_dir, self.ui.editSID.text() + self.ui.editOPID.text())
+        new_dir = os.path.join(self.current_dir, self.platform_name + '_' + self.ui.editSID.text()).replace('\\', '/')
         if not os.path.exists(new_dir):
             os.mkdir(new_dir)
         if os.path.exists(new_dir):
@@ -298,13 +324,20 @@ class MultiTestWindow(QWidget):
                 self.test_log.add_separator()
                 self.test_log.add_table_data(self.ui.tableWidget)
 
+            tmp_dir = os.path.join(self.dst_dir, self.platform_name + '_' + self.ui.editSID.text()).replace('\\', '/')
+            if os.path.exists(tmp_dir):
+                for root, dirs, files in os.walk(str(tmp_dir), topdown=False):
+                    for file in files:
+                        file_path = os.path.join(root, file)
+                        os.remove(file_path)
+                os.rmdir(tmp_dir)
+            shutil.move(str(new_dir), self.dst_dir)
 
     def serial_connect(self):
         port_name = self.ui.boxSerialSelect.currentText()
         baud_rate = self.ui.boxBaudSelect.currentText()
 
         if self.serial.open(port_name, baud_rate) is True:
-            # print('串口连接成功！！！！')
             self.serial.data_received.connect(self.handle_serial_data)
             self.notify_signal.connect(self.handle_test_result)
             self.serial_link = True
@@ -324,12 +357,3 @@ class MultiTestWindow(QWidget):
         # print('data', data)
         self.ui.editTestInfor.append(data)
         self.notify_signal.emit(data)
-        # if os.path.exists(self.test_image_path) and os.path.isfile(self.test_image_path):
-        #     self.notify_signal.emit('Image')
-        # else:
-        #     if self.test_passed in data:
-        #         self.notify_signal.emit('Passed')
-        #     elif 'Timeout' in data:
-        #         self.notify_signal.emit('Timeout')
-        #     else:
-        #         self.notify_signal.emit('Failed')
