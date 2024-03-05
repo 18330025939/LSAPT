@@ -144,6 +144,10 @@ class MultiConfigWindow(QWidget):
         UI.logger.log_debug('parameter config generation')
         UI.tableItem.save_test_item(self.ui.editTestName.text().strip(), config)
 
+    def show_platform_info(self, data):
+        self.ui.editPlatInfo.append(data)
+
+    @staticmethod
     def import_file_to_table(self):
         current_path = UI.tableItem.import_table()
         if current_path is not None:
@@ -165,6 +169,8 @@ class MultiConfigWindow(QWidget):
             mes_box.setWindowTitle('警告')
             mes_box.exec_()
         elif UI.platWin is not None and UI.platWin.get_hw_plat_info() is not None:
+            data = UI.platWin.get_platform_config_info()
+            self.show_platform_info(data)
             mes_box = QMessageBox()
             mes_box.setIcon(QMessageBox.Information)
             mes_box.setText("请检查平台配置信息！")

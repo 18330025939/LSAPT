@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QObject, pyqtSignal, QTimer, pyqtSlot, QByteArray, QIODevice, QThread
+from PyQt5.QtCore import QObject, pyqtSignal, QTimer, pyqtSlot, QByteArray, QIODevice
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 
 

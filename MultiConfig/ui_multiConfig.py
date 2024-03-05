@@ -441,22 +441,18 @@ class Ui_MultiConfig(object):
         self.tableTestItem.verticalHeader().setHighlightSections(True)
         self.tableTestItem.verticalHeader().setStretchLastSection(True)
         self.verticalLayout_6.addWidget(self.tableTestItem)
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(MultiConfig)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(1)
-        sizePolicy.setHeightForWidth(self.plainTextEdit.sizePolicy().hasHeightForWidth())
-        self.plainTextEdit.setSizePolicy(sizePolicy)
-        self.plainTextEdit.setStyleSheet("background-color: rgb(0, 0, 0);")
-        self.plainTextEdit.setFrameShape(QtWidgets.QFrame.Panel)
-        self.plainTextEdit.setPlainText("")
-        self.plainTextEdit.setOverwriteMode(False)
-        self.plainTextEdit.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByKeyboard|QtCore.Qt.TextEditable|QtCore.Qt.TextEditorInteraction|QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
-        self.plainTextEdit.setMaximumBlockCount(50)
-        self.plainTextEdit.setBackgroundVisible(False)
-        self.plainTextEdit.setCenterOnScroll(False)
-        self.plainTextEdit.setObjectName("plainTextEdit")
-        self.verticalLayout_6.addWidget(self.plainTextEdit)
+        self.editPlatInfo = QtWidgets.QTextEdit(MultiConfig)
+        self.editPlatInfo.setStyleSheet("QTextEdit\n"
+"{\n"
+"    background-color: rgb(2, 2, 2);\n"
+"    color: rgb(255, 255, 255);\n"
+"    font: 12pt \"等线\";\n"
+"}")
+        self.editPlatInfo.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.editPlatInfo.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.editPlatInfo.setReadOnly(True)
+        self.editPlatInfo.setObjectName("editPlatInfo")
+        self.verticalLayout_6.addWidget(self.editPlatInfo)
         self.verticalLayout_6.setStretch(0, 1)
         self.verticalLayout_6.setStretch(1, 15)
         self.verticalLayout_6.setStretch(2, 3)
@@ -503,5 +499,4 @@ class Ui_MultiConfig(object):
         __sortingEnabled = self.tableTestItem.isSortingEnabled()
         self.tableTestItem.setSortingEnabled(False)
         self.tableTestItem.setSortingEnabled(__sortingEnabled)
-        self.plainTextEdit.setPlaceholderText(_translate("MultiConfig", "测试用例相关信息"))
 import icons_rc

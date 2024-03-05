@@ -100,6 +100,15 @@ class PlatConfigWindow(QWidget):
                     for k, v in value.items():
                         if k == self.get_ftp_path_object_name():
                             self.ui.editFtpPath.setText(v)
+            self.platform_dir = self.ui.editHwPlatform.text() + "_" + self.ui.editHwVersion.text()
+
+    def get_platform_config_info(self):
+        info = ""
+        info += self.ui.labelHWPlatName.text() + self.ui.editHwPlatform.text() + "\n"
+        info += self.ui.labelHwVersion.text() + self.ui.editHwVersion.text() + "\n"
+        info += self.ui.labelHwTestMode.text() + self.ui.editHwMode.text() + "\n"
+        info += self.ui.labelFtpPath.text() + self.ui.editFtpPath.text() + "\n"
+        return info
 
     def get_hw_platform_object_name(self):
         return self.ui.editHwPlatform.objectName()

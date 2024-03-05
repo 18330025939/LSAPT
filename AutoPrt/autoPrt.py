@@ -1,5 +1,3 @@
-import threading
-
 from PyQt5.QtWidgets import QMainWindow, QWidget
 from AutoPrt.ui_autoPrt import Ui_AutoPrt
 from MultiConfig.multiConfig import MultiConfigWindow

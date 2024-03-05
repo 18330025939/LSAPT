@@ -298,6 +298,7 @@ class MultiTestWindow(QWidget):
                         for k, v in value.items():
                             if k == UI.platWin.get_ftp_path_object_name():
                                 self.dst_dir = v
+
     def save_test_parameters(self):
         if self.test_log is not None:
             self.test_log.add_data(self.ui.labelModel.objectName().replace('label', '') + '=' + self.ui.labelModel.text())

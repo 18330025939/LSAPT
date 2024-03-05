@@ -52,7 +52,7 @@
         <property name="font">
          <font>
           <family>Agency FB</family>
-          <pointsize>11</pointsize>
+          <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -75,7 +75,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,2">
              <item>
-              <widget class="QLabel" name="label">
+              <widget class="QLabel" name="labelHWPlatName">
                <property name="font">
                 <font>
                  <family>Agency FB</family>
@@ -93,11 +93,15 @@
               <widget class="QLineEdit" name="editHwPlatform">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>
@@ -106,7 +110,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,2">
              <item>
-              <widget class="QLabel" name="label_2">
+              <widget class="QLabel" name="labelHwVersion">
                <property name="font">
                 <font>
                  <family>Agency FB</family>
@@ -124,11 +128,15 @@
               <widget class="QLineEdit" name="editHwVersion">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>
@@ -137,7 +145,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,2">
              <item>
-              <widget class="QLabel" name="label_3">
+              <widget class="QLabel" name="labelHwTestMode">
                <property name="font">
                 <font>
                  <family>Agency FB</family>
@@ -155,11 +163,15 @@
               <widget class="QLineEdit" name="editHwMode">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>
@@ -181,7 +193,7 @@
         <property name="font">
          <font>
           <family>Agency FB</family>
-          <pointsize>11</pointsize>
+          <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -216,11 +228,15 @@
               <widget class="QLineEdit" name="editSysLogin">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>
@@ -247,11 +263,15 @@
               <widget class="QLineEdit" name="editSysPassword">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>
@@ -278,11 +298,15 @@
               <widget class="QLineEdit" name="editSysStartTimeout">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>
@@ -324,11 +348,15 @@
               <widget class="QLineEdit" name="editSysVersion">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>
@@ -350,7 +378,7 @@
         <property name="font">
          <font>
           <family>Agency FB</family>
-          <pointsize>11</pointsize>
+          <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -385,11 +413,15 @@
               <widget class="QLineEdit" name="editFtpHost">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>
@@ -416,11 +448,15 @@
               <widget class="QLineEdit" name="editFtpPort">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>
@@ -447,11 +483,15 @@
               <widget class="QLineEdit" name="editFtpUserName">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>
@@ -478,11 +518,15 @@
               <widget class="QLineEdit" name="editFtpPassword">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>
@@ -491,7 +535,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="1,2">
              <item>
-              <widget class="QLabel" name="label_12">
+              <widget class="QLabel" name="labelFtpPath">
                <property name="font">
                 <font>
                  <family>Agency FB</family>
@@ -509,11 +553,15 @@
               <widget class="QLineEdit" name="editFtpPath">
                <property name="font">
                 <font>
-                 <family>Agency FB</family>
+                 <family>宋体</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;宋体&quot;;</string>
                </property>
               </widget>
              </item>

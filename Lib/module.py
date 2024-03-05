@@ -107,7 +107,6 @@ class ModuleLib(QTreeWidget):
             if parent_item:
                 parent_item.takeChild(parent_item.indexOfChild(item))
 
-
     def export_tree(self):
         dialog = QFileDialog()
         dialog.setDirectory(self.current_dir)
