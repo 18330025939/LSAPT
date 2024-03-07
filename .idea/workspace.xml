@@ -6,16 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="ccdba8c2-3479-4c83-894c-40547abcd70a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutoPrt/autoPrt.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoPrt/autoPrt.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Lib/console.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lib/console.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lib/module.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lib/module.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lib/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lib/item.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MultiConfig/multiConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/MultiConfig/multiConfig.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MultiConfig/ui_multiConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/MultiConfig/ui_multiConfig.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MultiConfig/ui_multiConfig.ui" beforeDir="false" afterPath="$PROJECT_DIR$/MultiConfig/ui_multiConfig.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MultiTest/multiTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/MultiTest/multiTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MultiTest/ui_multiTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/MultiTest/ui_multiTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MultiTest/ui_multiTest.ui" beforeDir="false" afterPath="$PROJECT_DIR$/MultiTest/ui_multiTest.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlatConfig/platConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlatConfig/platConfig.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlatConfig/ui_platConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlatConfig/ui_platConfig.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlatConfig/ui_platConfig.ui" beforeDir="false" afterPath="$PROJECT_DIR$/PlatConfig/ui_platConfig.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/icons.qrc" beforeDir="false" afterPath="$PROJECT_DIR$/icons/icons.qrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons_rc.py" beforeDir="false" afterPath="$PROJECT_DIR$/icons_rc.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,34 +44,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.config.executor": "Run",
-    "Python.createJson.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.multiConfig.executor": "Run",
-    "Python.para.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.ui.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "G:/work/MlituConfig_win/LSAPT",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.createJson.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.multiConfig.executor&quot;: &quot;Run&quot;,
+    &quot;Python.para.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ui.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;G:/work/MlituConfig_win/LSAPT&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\work\MlituConfig_win\LSAPT\PlatConfig" />
@@ -254,7 +255,8 @@
       <workItem from="1708388939001" duration="35410000" />
       <workItem from="1709082848729" duration="14629000" />
       <workItem from="1709187060796" duration="13166000" />
-      <workItem from="1709200260919" duration="39393000" />
+      <workItem from="1709200260919" duration="41281000" />
+      <workItem from="1709707146798" duration="20290000" />
     </task>
     <servers />
   </component>
@@ -277,7 +279,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/MultiConfig/ui_multiConfig.py</url>
-          <line>499</line>
+          <line>601</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -294,7 +296,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ui_multiConfig_ui$main.coverage" NAME="main Coverage Results" MODIFIED="1709608799834" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ui_multiConfig_ui$main.coverage" NAME="main Coverage Results" MODIFIED="1709789908654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MlituConfig$main.coverage" NAME="main Coverage Results" MODIFIED="1704384496440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LSAPT$main.coverage" NAME="main Coverage Results" MODIFIED="1706077688711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LSAPT$multiConfig.coverage" NAME="multiConfig Coverage Results" MODIFIED="1704870297386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MultiConfig" />

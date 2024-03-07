@@ -25,6 +25,7 @@ class MultiConfigWindow(QWidget):
         self.ui.btnImport.clicked.connect(self.import_file_to_table)
         self.ui.btnExport.clicked.connect(self.export_table_to_file)
         self.ui.editRootItem.returnPressed.connect(self.edit_root_item)
+        self.ui.btnNewProject.clicked.connect(self.new_table_project)
 
     def on_close(self, event):
         self.form.hide()
@@ -162,13 +163,13 @@ class MultiConfigWindow(QWidget):
             mes_box.exec_()
 
     def export_table_to_file(self):
-        if UI.platWin is None or UI.platWin.get_hw_plat_info() is None:
+        if UI.platWin.get_hw_plat_info() is None:
             mes_box = QMessageBox()
             mes_box.setIcon(QMessageBox.Warning)
             mes_box.setText("请先进行平台信息配置！")
             mes_box.setWindowTitle('警告')
             mes_box.exec_()
-        elif UI.platWin is not None and UI.platWin.get_hw_plat_info() is not None:
+        else:
             data = UI.platWin.get_platform_config_info()
             self.show_platform_info(data)
             mes_box = QMessageBox()
@@ -185,4 +186,8 @@ class MultiConfigWindow(QWidget):
                 UI.tableItem.export_table(UI.platWin.get_hw_plat_info())
             else:
                 pass
-        # print('export end')
+
+    def new_table_project(self):
+        UI.tableItem.new_table()
+        UI.platWin.clear_platform_config_info()
+        self.ui.editPlatInfo.clear()

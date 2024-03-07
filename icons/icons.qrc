@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="icons">
+    <file>new.png</file>
+    <file>disconnect1.png</file>
+    <file>connect1.png</file>
+    <file>disconnect.png</file>
     <file>connect.png</file>
     <file>open1.png</file>
     <file>save1.png</file>

@@ -16,7 +16,7 @@ class SerialPort(QObject):
 
         # 连接串口数据接收的信号和槽函数
         self.serial_port.readyRead.connect(self.handle_serial_data)
-
+        self.buffer = ''
         self.timer = QTimer()
         self.timer.timeout.connect(self.command_timeout_handler)
         # self.timer.setSingleShot(True)
@@ -46,6 +46,9 @@ class SerialPort(QObject):
         else:
             return False
 
+    def close(self):
+        self.serial_port.close()
+
     def send_command(self, command, timeout):
         if self.serial_port.isOpen():
             # print('command', QByteArray(command.encode()))
@@ -54,9 +57,9 @@ class SerialPort(QObject):
             if int(timeout) > 0:
                 self.timer.start(int(timeout) * 1000)
 
-    @pyqtSlot()
     def command_timeout_handler(self):
         self.timer.stop()
+        # print('timeout')
         if self.serial_port.isOpen():
             self.data_received.emit('Timeout')
 
@@ -64,7 +67,11 @@ class SerialPort(QObject):
         if self.serial_port.isOpen():
             data = self.serial_port.readAll().data()
             str_data = data.decode('utf-8')
-            self.data_received.emit(str_data)
+            # print('rev', data, str_data)
+            self.buffer += str_data
+            if str_data.find('\r') != -1:
+                self.data_received.emit(self.buffer)
+                self.buffer = ''
 
     def close(self):
         if self.serial_port.isOpen():

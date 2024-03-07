@@ -69,6 +69,7 @@ class MultiTestWindow(QWidget):
         self.ui.btnOpen.clicked.connect(self.open_test_file)
         # self.ui.btnSave.clicked.connect(self.save_text_log)
         self.ui.btnSerialConnect.clicked.connect(self.serial_connect)
+        self.ui.btnSerialDisconnect.clicked.connect(self.serial_disconnect)
 
     def on_close(self, event):
         self.form.hide()
@@ -223,18 +224,7 @@ class MultiTestWindow(QWidget):
         if os.path.exists(new_dir):
             file_path = os.path.join(str(new_dir), UI.testProcessLog)
             self.test_progress_log.select_file(file_path)
-        if self.running and self.current_row != 0:
-            self.rows = TableWidgetIO.import_table_widget(self.ui.tableWidget, self.table_file_path)
-            for row in range(self.rows):
-                self.testTable.set_row_background(row, QColor('white'))
-                for col in range(self.testTable_header.index('Result'), self.columns):
-                    item = self.ui.tableWidget.item(row, col)
-                    if item and item.text().strip():
-                        item.setText('')
-            self.ui.labelTotalNumber.setText('0')
-            self.ui.labelSkipNumber.setText('0')
-            self.ui.labelPassNumber.setText('0')
-            self.ui.labelFailNumber.setText('0')
+        self.import_table_widget(self.table_file_path)
         self.thread_start()
 
     def analysis_test_script(self, name):
@@ -264,10 +254,27 @@ class MultiTestWindow(QWidget):
             return False
         return True
 
+    def import_table_widget(self, file_path):
+        # self.rows = TableWidgetIO.import_table_widget(self.ui.tableWidget, file_path)
+        if self.running and self.current_row != 0:
+            for row in range(self.rows):
+                self.testTable.set_row_background(row, QColor('white'))
+                for col in range(self.testTable_header.index('Result'), self.columns):
+                    item = self.ui.tableWidget.item(row, col)
+                    if item and item.text().strip():
+                        item.setText('')
+            self.ui.labelTotalNumber.setText('0')
+            self.ui.labelSkipNumber.setText('0')
+            self.ui.labelPassNumber.setText('0')
+            self.ui.labelFailNumber.setText('0')
+            self.ui.editTestInfor.clear()
+        else:
+            self.rows = TableWidgetIO.import_table_widget(self.ui.tableWidget, file_path)
+
     def open_test_file(self):
         file_path, _ = QFileDialog().getOpenFileName(None, "打开文件", "", "JSON Files (" + UI.testItemsPlatFile + ")")
         if file_path:
-            self.rows = TableWidgetIO.import_table_widget(self.ui.tableWidget, file_path)
+            self.import_table_widget(file_path)
             if not self.rows:
                 mes_box = QMessageBox()
                 mes_box.setIcon(QMessageBox.Warning)
@@ -332,7 +339,8 @@ class MultiTestWindow(QWidget):
                         file_path = os.path.join(root, file)
                         os.remove(file_path)
                 os.rmdir(tmp_dir)
-            shutil.move(str(new_dir), self.dst_dir)
+            if os.path.exists(self.dst_dir):
+                shutil.move(str(new_dir), self.dst_dir)
 
     def serial_connect(self):
         port_name = self.ui.boxSerialSelect.currentText()
@@ -353,6 +361,15 @@ class MultiTestWindow(QWidget):
             mes_box.setText("串口连接失败,请检查串口是否正确连接！")
             mes_box.setWindowTitle('警告')
             mes_box.exec_()
+
+    def serial_disconnect(self):
+        self.serial.close()
+        self.serial_link = False
+        mes_box = QMessageBox()
+        mes_box.setIcon(QMessageBox.Information)
+        mes_box.setText("串口已断开！")
+        mes_box.setWindowTitle('提示')
+        mes_box.exec_()
 
     def handle_serial_data(self, data):
         # print('data', data)

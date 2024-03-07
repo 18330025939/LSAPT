@@ -110,6 +110,13 @@ class PlatConfigWindow(QWidget):
         info += self.ui.labelFtpPath.text() + self.ui.editFtpPath.text() + "\n"
         return info
 
+    def clear_platform_config_info(self):
+        self.ui.editHwPlatform.setText("")
+        self.ui.editHwVersion.setText("")
+        self.ui.editHwMode.setText("")
+        self.ui.editFtpPath.setText("")
+        self.platform_dir = None
+
     def get_hw_platform_object_name(self):
         return self.ui.editHwPlatform.objectName()
 

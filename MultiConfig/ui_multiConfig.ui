@@ -33,10 +33,22 @@
           <property name="text">
            <string>用例库</string>
           </property>
+          <property name="font">
+           <font>
+            <family>等线</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
          </column>
          <column>
           <property name="text">
            <string>版本</string>
+          </property>
+          <property name="font">
+           <font>
+            <family>等线</family>
+            <pointsize>11</pointsize>
+           </font>
           </property>
          </column>
         </widget>
@@ -187,6 +199,9 @@
            <verstretch>3</verstretch>
           </sizepolicy>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -203,6 +218,18 @@ p, li { white-space: pre-wrap; }
        </item>
        <item>
         <widget class="QLabel" name="label_8">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>测试用例名称</string>
          </property>
@@ -219,6 +246,9 @@ p, li { white-space: pre-wrap; }
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="styleSheet">
+          <string notr="true">font: 10pt &quot;等线&quot;;</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -234,6 +264,12 @@ p, li { white-space: pre-wrap; }
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>10</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">QCheckBox
@@ -254,6 +290,12 @@ p, li { white-space: pre-wrap; }
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">QCheckBox
 {
@@ -273,6 +315,12 @@ p, li { white-space: pre-wrap; }
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>人为参与</string>
          </property>
@@ -285,6 +333,12 @@ p, li { white-space: pre-wrap; }
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>10</pointsize>
+          </font>
          </property>
          <property name="text">
           <string>总是测试</string>
@@ -302,6 +356,12 @@ p, li { white-space: pre-wrap; }
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>跳过测试</string>
          </property>
@@ -316,6 +376,12 @@ p, li { white-space: pre-wrap; }
           <layout class="QVBoxLayout" name="verticalLayout" stretch="1,2,1,1,1,1,1,1,1,1,1,1,1,1">
            <item>
             <widget class="QLabel" name="label">
+             <property name="font">
+              <font>
+               <family>宋体</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>测试指令</string>
              </property>
@@ -332,6 +398,9 @@ p, li { white-space: pre-wrap; }
                <verstretch>3</verstretch>
               </sizepolicy>
              </property>
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;等线&quot;;</string>
+             </property>
              <property name="lineWrapColumnOrWidth">
               <number>454344444</number>
              </property>
@@ -345,6 +414,12 @@ p, li { white-space: pre-wrap; }
            </item>
            <item>
             <widget class="QLabel" name="label_2">
+             <property name="font">
+              <font>
+               <family>宋体</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>返回的信息</string>
              </property>
@@ -361,6 +436,9 @@ p, li { white-space: pre-wrap; }
                <verstretch>1</verstretch>
               </sizepolicy>
              </property>
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;等线&quot;;</string>
+             </property>
              <property name="placeholderText">
               <string/>
              </property>
@@ -368,6 +446,12 @@ p, li { white-space: pre-wrap; }
            </item>
            <item>
             <widget class="QLabel" name="label_3">
+             <property name="font">
+              <font>
+               <family>宋体</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>指令超时时间</string>
              </property>
@@ -384,6 +468,9 @@ p, li { white-space: pre-wrap; }
                <verstretch>1</verstretch>
               </sizepolicy>
              </property>
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;等线&quot;;</string>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -394,6 +481,12 @@ p, li { white-space: pre-wrap; }
            </item>
            <item>
             <widget class="QLabel" name="label_4">
+             <property name="font">
+              <font>
+               <family>宋体</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>测试通过的参考照片</string>
              </property>
@@ -410,6 +503,9 @@ p, li { white-space: pre-wrap; }
                <verstretch>1</verstretch>
               </sizepolicy>
              </property>
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;等线&quot;;</string>
+             </property>
              <property name="placeholderText">
               <string/>
              </property>
@@ -417,6 +513,12 @@ p, li { white-space: pre-wrap; }
            </item>
            <item>
             <widget class="QLabel" name="label_5">
+             <property name="font">
+              <font>
+               <family>宋体</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>PASS显示的文字</string>
              </property>
@@ -433,6 +535,9 @@ p, li { white-space: pre-wrap; }
                <verstretch>1</verstretch>
               </sizepolicy>
              </property>
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;等线&quot;;</string>
+             </property>
              <property name="placeholderText">
               <string/>
              </property>
@@ -440,6 +545,12 @@ p, li { white-space: pre-wrap; }
            </item>
            <item>
             <widget class="QLabel" name="label_6">
+             <property name="font">
+              <font>
+               <family>宋体</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>FAIL显示的文字</string>
              </property>
@@ -456,6 +567,9 @@ p, li { white-space: pre-wrap; }
                <verstretch>1</verstretch>
               </sizepolicy>
              </property>
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;等线&quot;;</string>
+             </property>
              <property name="placeholderText">
               <string/>
              </property>
@@ -463,6 +577,12 @@ p, li { white-space: pre-wrap; }
            </item>
            <item>
             <widget class="QLabel" name="label_7">
+             <property name="font">
+              <font>
+               <family>宋体</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>RETRY显示的文字</string>
              </property>
@@ -478,6 +598,9 @@ p, li { white-space: pre-wrap; }
                <horstretch>2</horstretch>
                <verstretch>1</verstretch>
               </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;等线&quot;;</string>
              </property>
              <property name="placeholderText">
               <string/>
@@ -637,9 +760,35 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1,15,3">
+      <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1,12,3">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1,8">
+        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1,1,16">
+         <item>
+          <widget class="QPushButton" name="btnNewProject">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../icons/icons.qrc">
+             <normaloff>:/icons/new.png</normaloff>:/icons/new.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>32</width>
+             <height>32</height>
+            </size>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
          <item>
           <widget class="QPushButton" name="btnImport">
            <property name="sizePolicy">
@@ -733,14 +882,23 @@ p, li { white-space: pre-wrap; }
            <verstretch>5</verstretch>
           </sizepolicy>
          </property>
+         <property name="styleSheet">
+          <string notr="true">font: 10pt &quot;等线&quot;;</string>
+         </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOn</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
          </property>
          <property name="sortingEnabled">
           <bool>false</bool>
          </property>
          <property name="rowCount">
-          <number>30</number>
+          <number>50</number>
          </property>
          <attribute name="horizontalHeaderCascadingSectionResizes">
           <bool>false</bool>
@@ -765,6 +923,9 @@ p, li { white-space: pre-wrap; }
          </attribute>
          <attribute name="verticalHeaderCascadingSectionResizes">
           <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderMinimumSectionSize">
+          <number>25</number>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
           <number>30</number>
@@ -805,13 +966,36 @@ p, li { white-space: pre-wrap; }
          <row/>
          <row/>
          <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
          <column>
           <property name="text">
            <string>Level</string>
           </property>
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
+            <family>等线</family>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
            </font>
           </property>
           <property name="textAlignment">
@@ -821,6 +1005,14 @@ p, li { white-space: pre-wrap; }
          <column>
           <property name="text">
            <string>测试项名称</string>
+          </property>
+          <property name="font">
+           <font>
+            <family>等线</family>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
           </property>
           <property name="textAlignment">
            <set>AlignCenter</set>

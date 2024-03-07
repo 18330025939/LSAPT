@@ -1,3 +1,4 @@
+import glob
 import json
 import os
 import shutil
@@ -23,6 +24,7 @@ class TableWidgetIO:
                 data.append(row_data)
 
         with open(file_path, 'w') as file:
+            file.truncate(0)
             json.dump(data, file, ensure_ascii=False, indent=4)
 
     @staticmethod
@@ -78,6 +80,7 @@ class ConfigItems(QTableWidget):
         self.row = 0
         self.col = 0
 
+        self.is_import = None
         self.current_dir = os.path.join(os.getcwd(), UI.testItemsDir)
         if not os.path.exists(self.current_dir):
             os.makedirs(self.current_dir)
@@ -153,50 +156,49 @@ class ConfigItems(QTableWidget):
 
     def save_from_config(self, data):
         current_row = self.table.currentRow()
-        # print(current_row, self.index)
         item = self.table.item(current_row, 1)
-        if self.col_attribute_check(1, data[self.table.horizontalHeaderItem(1).text()]):
-            return
-        if item is not None and current_row != 0:
-            # UI.logger.log_debug('save from config not None')
-            self.table.insertRow(current_row)
-            for col in range(self.table.columnCount()):
-                column_attribute = self.table.horizontalHeaderItem(col).text()
-                item = QTableWidgetItem(data[column_attribute])
-                self.table.setItem(current_row, col, item)
-            # UI.logger.log_debug('save from config insert row')
-            for row in range(current_row + 1, self.index + 1):
-                item = self.table.item(row, 0)
-                if item:
-                    value = int(item.text()) + 1
-                    new_item = QTableWidgetItem(str(value))
-                    self.table.setItem(row, 0, new_item)
-            # UI.logger.log_debug('save from config rewrite level')
-            current_state = self.table.item(self.row, self.col).isSelected()
-            if current_state:
-                self.table.item(self.row, self.col).setSelected(False)
-        else:
-            # UI.logger.log_debug('save from config None')
-            for col in range(self.table.columnCount()):
-                column_attribute = self.table.horizontalHeaderItem(col).text()
-                if column_attribute in data:
-                    # print(column_attribute, data[column_attribute])
-                    new_item = QTableWidgetItem(data[column_attribute])
-                    self.table.setItem(current_row, col, new_item)
+        if not self.col_attribute_check(1, data[self.table.horizontalHeaderItem(1).text()]):
+            if item is not None:
+                UI.logger.log_debug('save from config not None')
+                self.table.insertRow(current_row)
+                for col in range(self.table.columnCount()):
+                    column_attribute = self.table.horizontalHeaderItem(col).text()
+                    item = QTableWidgetItem(data[column_attribute])
+                    self.table.setItem(current_row, col, item)
+                UI.logger.log_debug('save from config insert row')
+                for row in range(current_row + 1, self.index + 1):
+                    item = self.table.item(row, 0)
+                    if item:
+                        value = int(item.text()) + 1
+                        new_item = QTableWidgetItem(str(value))
+                        self.table.setItem(row, 0, new_item)
+                UI.logger.log_debug('save from config rewrite level')
+                current_state = self.table.item(self.row, self.col).isSelected()
+                if current_state:
+                    self.table.item(self.row, self.col).setSelected(False)
+            else:
+                UI.logger.log_debug('save from config None')
+                for col in range(self.table.columnCount()):
+                    column_attribute = self.table.horizontalHeaderItem(col).text()
+                    if column_attribute in data:
+                        # print(column_attribute, data[column_attribute])
+                        new_item = QTableWidgetItem(data[column_attribute])
+                        self.table.setItem(current_row, col, new_item)
 
-        self.index += 1
+            self.index += 1
         self.table.setCurrentCell(self.index, 0)
 
     def save_test_item(self, name, data):
-        file_path = os.path.join(self.current_dir, name + '.json')
-        # print(file_path)
+        file_path = os.path.join(self.current_dir, name + '.json').replace('\\', '/')
         with open(file_path, 'w') as f:
             f.truncate(0)
             json.dump(data, f, ensure_ascii=False, indent=4)
-        TableWidgetIO.save_temporary_table(self.table)
+
+        if not self.is_import:
+            TableWidgetIO.save_temporary_table(self.table)
 
     def delete_test_item(self, name):
-        file_path = os.path.join(self.current_dir, name + '.json')
+        file_path = os.path.join(self.current_dir, name + '.json').replace('\\', '/')
         if os.path.exists(file_path):
             os.remove(file_path)
 
@@ -205,25 +207,31 @@ class ConfigItems(QTableWidget):
 
     def export_table(self, table_dir):
         dialog = QFileDialog()
-        export_dir = os.path.join(self.current_dir, table_dir)
+        if self.is_import:
+            export_dir = self.current_dir
+        else:
+            export_dir = os.path.join(self.current_dir, table_dir).replace('\\', '/')
         dialog.setDirectory(export_dir)
-        file_path, _ = dialog.getSaveFileName(self, "导出文件", UI.testItemsPlatFile, "JSON Files (*.json)")
-        # print(file_path)
+        file_path, _ = dialog.getSaveFileName(self, "导出文件", UI.testItemsPlatFile, "JSON Files (" + UI.testItemsPlatFile + ")")
         if file_path:
             TableWidgetIO.export_table_widget(self.table, file_path)
 
         # row_count = self.table.rowCount()
         # column_count = self.table.columnCount()
-        for row in range(self.index):
-            item = self.table.item(row, 1)
-            if item:
-                source_file = os.path.join(self.current_dir, item.text() + '.json')
-                if os.path.exists(source_file):
-                    destination_file = os.path.join(export_dir, item.text() + '.json')
-                    shutil.move(source_file, destination_file)
+        if not self.is_import:
+            for row in range(self.index):
+                item = self.table.item(row, 1)
+                if item:
+                    source_file = os.path.join(self.current_dir, item.text() + '.json').replace('\\', '/')
+                    if os.path.exists(source_file):
+                        destination_file = os.path.join(export_dir, item.text() + '.json').replace('\\', '/')
+                        shutil.move(str(source_file), str(destination_file))
         file_path = os.path.join(self.current_dir, UI.testItemsTempFile)
         if os.path.exists(file_path):
-            os.remove(file_path)
+            json_files = glob.glob(os.path.join(self.current_dir, '*.json'))
+            for file in json_files:
+                os.remove(file)
+            # os.remove(file_path)
 
     def import_table(self):
         dialog = QFileDialog()
@@ -233,10 +241,23 @@ class ConfigItems(QTableWidget):
             rows = TableWidgetIO.import_table_widget(self.table, file_path)
             if not rows:
                 return None
+            self.index = rows
+            self.table.setCurrentCell(self.index, 0)
             self.current_dir = os.path.dirname(file_path)
+            self.is_import = True
             return self.current_dir
 
         return None
+
+    def new_table(self):
+        if self.is_import:
+            self.is_import = False
+        current_path = os.getcwd()
+        self.current_dir = os.path.join(current_path, UI.testItemsDir)
+
+        self.table.clearContents()
+        self.index = 0
+        self.table.setCurrentCell(self.index, 0)
 
 
 class TestItems(QTableWidget):
