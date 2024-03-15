@@ -1,6 +1,7 @@
-from PyQt5.QtCore import QObject, pyqtSignal, QTimer, pyqtSlot, QByteArray, QIODevice
+from PyQt5.QtCore import QObject, pyqtSignal, QTimer, pyqtSlot, QByteArray, QIODevice, QTime
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
-
+from Lib.ui import UI
+import time
 
 class SerialPort(QObject):
     data_received = pyqtSignal(str)
@@ -8,6 +9,8 @@ class SerialPort(QObject):
         super().__init__()
         # 创建串口对象
         self.serial_port = QSerialPort()
+        self.start_time = None
+        self.end_time = None
 
         self.serial_port.setDataBits(QSerialPort.Data8)
         self.serial_port.setParity(QSerialPort.NoParity)
@@ -16,9 +19,9 @@ class SerialPort(QObject):
 
         # 连接串口数据接收的信号和槽函数
         self.serial_port.readyRead.connect(self.handle_serial_data)
-        self.buffer = ''
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.command_timeout_handler)
+        self.buffer = b''
+        # self.timer = QTimer()
+        # self.timer.timeout.connect(self.command_timeout_handler)
         # self.timer.setSingleShot(True)
 
     def open(self, port, baud):
@@ -46,36 +49,70 @@ class SerialPort(QObject):
         else:
             return False
 
-    def close(self):
-        self.serial_port.close()
-
     def send_command(self, command, timeout):
         if self.serial_port.isOpen():
-            # print('command', QByteArray(command.encode()))
-            self.serial_port.write(QByteArray(command.encode()))
-            self.serial_port.waitForBytesWritten(1000)
-            if int(timeout) > 0:
-                self.timer.start(int(timeout) * 1000)
+            data = command + '\n'
+            byte_array = data.encode()
+            UI.logger.log_debug('Serial Send data: %s', byte_array)
+            self.buffer = b''
+            # self.serial_port.writeData(byte_array)
+            self.serial_port.write(byte_array)
+            self.serial_port.waitForBytesWritten()
+            if float(timeout) != 0:
+                self.timer.start(int(float(timeout) * 1000))
 
-    def command_timeout_handler(self):
-        self.timer.stop()
-        # print('timeout')
-        if self.serial_port.isOpen():
-            self.data_received.emit('Timeout')
+    # def send_command(self, command, max_retry=3):
+    #     self.serial_port.clearError()
+    #     retry_count = 0
+    #     data = command + '\n'
+    #     byte_array = data.encode()
+    #     while retry_count < max_retry:
+    #         if self.serial_port.isOpen() and self.serial_port.isWritable():
+    #             self.serial_port.write(byte_array)
+    #             if not self.serial_port.waitForBytesWritten(1000):
+    #                 retry_count += 1
+    #                 continue
+    #             return True
+    #         else:
+    #             self.serial_port.clearError()
+    #             self.serial_port.open(QIODevice.ReadWrite)
+    #             retry_count += 1
+    #     return False
+
+    # def command_timeout_handler(self):
+    #     self.timer.stop()
+    #     print('timeout')
+    #     if self.serial_port.isOpen():
+    #         self.data_received.emit('Timeout')
 
     def handle_serial_data(self):
         if self.serial_port.isOpen():
-            data = self.serial_port.readAll().data()
-            str_data = data.decode('utf-8')
-            # print('rev', data, str_data)
-            self.buffer += str_data
-            if str_data.find('\r') != -1:
-                self.data_received.emit(self.buffer)
-                self.buffer = ''
+            self.serial_port.waitForReadyRead(10)
+            if self.serial_port.bytesAvailable() > 0:
+                data = self.serial_port.readAll().data()
+                self.buffer += data
+            if b'\r\n[root' in self.buffer and b']#' in self.buffer:
+                UI.logger.log_debug('Serial receive data: %s', self.buffer)
+                self.data_received.emit(self.buffer.decode())
+
+    # def receive_timeout(self, timeout=500):
+    #     self.serial_port.clearError()
+    #     self.buffer = b''
+    #     start_time = QTime.currentTime()
+    #     while self.serial_port.isOpen() and self.serial_port.isReadable():
+    #         if self.serial_port.waitForReadyRead(1000):
+    #             self.buffer += self.serial_port.readAll().data()
+    #
+    #         elapsed_time = start_time.msecsTo(QTime.currentTime())
+    #         if elapsed_time > timeout:
+    #             break
+    #     return self.buffer.decode()
 
     def close(self):
         if self.serial_port.isOpen():
+            self.serial_port.waitForBytesWritten()
             self.serial_port.close()
+
 
 
 

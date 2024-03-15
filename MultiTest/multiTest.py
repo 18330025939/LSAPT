@@ -15,7 +15,7 @@ from PyQt5.QtCore import Qt, pyqtSignal, QEventLoop, QTimer
 
 
 class MultiTestWindow(QWidget):
-    notify_signal = pyqtSignal(str)
+    # notify_signal = pyqtSignal(str)
 
     def __init__(self, form):
         super().__init__()
@@ -26,6 +26,7 @@ class MultiTestWindow(QWidget):
         self.pid_sid_len = 16
         self.current_dir = None
         self.table_file_path = None
+        self.serial_data = None
 
         self.test_instr = None
         self.show_info = None
@@ -103,8 +104,15 @@ class MultiTestWindow(QWidget):
 
     def handle_test_result(self, message):
         # received_data = f'Received data: {message}'
-        self.test_progress_log.add_data('Received data:')
-        self.test_progress_log.add_data(message)
+        # self.test_progress_log.add_data('Received data:')
+        # self.test_progress_log.add_data(message)
+        lines = message.split('\r\n')
+        lines.pop()
+        for line in lines:
+            # line = line.strip()
+            if line:
+                self.ui.editTestInfor.append(line)
+
         current_time = datetime.datetime.now().time().strftime('%H:%M:%S')
         self.testTable.set_item(self.current_row, self.testTable_header.index('EndTime'), current_time)
         if os.path.exists(self.test_image_path) and os.path.isfile(self.test_image_path):
@@ -129,8 +137,10 @@ class MultiTestWindow(QWidget):
             self.ui.labelFailNumber.setText(str(int(self.ui.labelFailNumber.text()) + 1))
 
         self.ui.labelTotalNumber.setText(str(int(self.ui.labelTotalNumber.text()) + 1))
-        self.handle_event.set()
-        # self.serial_flag = True
+        self.test_progress_log.add_data('Received data:')
+        self.test_progress_log.add_data(message)
+        # self.handle_event.set()
+
 
     def thread_function(self):
         while self.running:
@@ -146,19 +156,18 @@ class MultiTestWindow(QWidget):
                 self.ui.labelTotalNumber.setText(str(int(self.ui.labelTotalNumber.text()) + 1))
                 self.ui.labelSkipNumber.setText(str(int(self.ui.labelSkipNumber.text()) + 1))
                 continue
-            # print(self.test_instr, self.test_timeout)
-            # 先不考虑多行的测试指令
-            self.serial.send_command(self.test_instr, self.test_timeout)
-            # if int(self.test_timeout) > 0:
-            #     self.timer.start(int(self.test_timeout) * 1000)
-            self.handle_event.clear()
             self.testTable.set_item(self.current_row, self.testTable_header.index('Result'), 'Running')
             current_date = datetime.datetime.now().strftime('%Y/%m/%d')
             self.testTable.set_item(self.current_row, self.testTable_header.index('Date'), current_date)
             current_time = datetime.datetime.now().time().strftime('%H:%M:%S')
             self.testTable.set_item(self.current_row, self.testTable_header.index('StartTime'), current_time)
+            self.handle_event.clear()
+            # 先不考虑多行的测试指令
+            self.serial.send_command(self.test_instr, self.test_timeout)
+            # self.serial.send_command(self.test_instr)
             self.handle_event.wait()
-            # self.timer.stop()
+            self.handle_test_result(self.serial_data)
+            UI.logger.log_debug('handle-event wait')
             self.current_row += 1
 
     # def command_timeout(self):
@@ -229,6 +238,7 @@ class MultiTestWindow(QWidget):
 
     def analysis_test_script(self, name):
         file_path = os.path.join(self.current_dir, name + '.json').replace('\\', '/')
+        UI.logger.log_debug('analysis script path: %s', file_path)
         with open(file_path, 'r') as file:
             data = json.load(file)
 
@@ -348,7 +358,7 @@ class MultiTestWindow(QWidget):
 
         if self.serial.open(port_name, baud_rate) is True:
             self.serial.data_received.connect(self.handle_serial_data)
-            self.notify_signal.connect(self.handle_test_result)
+            # self.notify_signal.connect(self.handle_test_result)
             self.serial_link = True
             mes_box = QMessageBox()
             mes_box.setIcon(QMessageBox.Information)
@@ -372,6 +382,8 @@ class MultiTestWindow(QWidget):
         mes_box.exec_()
 
     def handle_serial_data(self, data):
-        # print('data', data)
-        self.ui.editTestInfor.append(data)
-        self.notify_signal.emit(data)
+        index = data.find('\r\n')
+        if index != -1:
+            self.serial_data = data[index + 2:]
+        self.handle_event.set()
+        # self.notify_signal.emit(data)

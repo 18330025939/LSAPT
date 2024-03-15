@@ -1,23 +1,51 @@
-from PyQt5.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel, QPushButton
+from PyQt5.QtSerialPort import QSerialPort
+from PyQt5.QtCore import QIODevice, QByteArray, QTime
 
-class CustomMessageBox(QDialog):
-    def __init__(self):
-        super().__init__()
 
-        self.setWindowTitle('提示')
-        self.setFixedSize(300, 150) # 设置固定大小
+class SerialPort(QSerialPort):
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
-        layout = QVBoxLayout(self)
+    def sendWithRetry(self, data: QByteArray, max_retry: int):
+        self.clearError()
+        retry_count = 0
+        while retry_count < max_retry:
+            if self.isOpen() and self.isWritable():
+                self.write(data)
+                if not self.waitForBytesWritten(1000):
+                    retry_count += 1
+                    continue
+                return True
+            else:
+                self.clearError()
+                self.open(QIODevice.ReadWrite)
+                retry_count += 1
+        return False
 
-        label = QLabel('测试完成，请进行下一步操作！', self)
-        layout.addWidget(label)
+    def receiveWithTimeout(self, max_timeout: int):
+        self.clearError()
+        received_data = QByteArray()
+        start_time = QTime.currentTime()
+        while self.isOpen() and self.isReadable():
+            if self.waitForReadyRead(1000):
+                received_data += self.readAll()
+            elapsed_time = start_time.msecsTo(QTime.currentTime())
+            if elapsed_time >= max_timeout:
+                break
+        return received_data
 
-        continue_button = QPushButton('继续', self)
-        continue_button.clicked.connect(self.accept)
-        layout.addWidget(continue_button)
+serial_port = SerialPort()
+serial_port.setPortName("COM1")
+serial_port.setBaudRate(QSerialPort.Baud115200)
+serial_port.setDataBits(QSerialPort.Data8)
+serial_port.setParity(QSerialPort.NoParity)
+serial_port.setStopBits(QSerialPort.OneStop)
 
-        stop_button = QPushButton('中止', self)
-        stop_button.clicked.connect(self.reject)
-        layout.addWidget(stop_button)
+if serial_port.open(QIODevice.ReadWrite):
+    data = QByteArray(b'Hello, world!')
+    if serial_port.sendWithRetry(data, 3):
+        received_data = serial_port.receiveWithTimeout(1000)
+        print(received_data)
+    serial_port.close()
 
 
