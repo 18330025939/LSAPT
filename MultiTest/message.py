@@ -1,51 +1,18 @@
-from PyQt5.QtSerialPort import QSerialPort
-from PyQt5.QtCore import QIODevice, QByteArray, QTime
+import requests
+#
+# my_headers = {
+#
+# }
 
+url = "https://vdept3.bdstatic.com/mda-nadbjpk0hnxwyndu/720p/h264_delogo/1642148105214867253/mda-nadbjpk0hnxwyndu.mp4?v_from_s=hkapp-haokan-nanjing&auth_key=1710834446-0-0-cd872a3d4eebb49f4a4f3de6ab1942c0&bcevod_channel=searchbox_feed&pd=1&cr=2&cd=0&pt=3&logid=2846620178&vid=5423681428712102654&klogid=2846620178&abtest="
 
-class SerialPort(QSerialPort):
-    def __init__(self, parent=None):
-        super().__init__(parent)
+# my_params = {
+#
+# }
+# res = requests.get(url, headers=my_headers, params=my_params)
+res = requests.get(url)
 
-    def sendWithRetry(self, data: QByteArray, max_retry: int):
-        self.clearError()
-        retry_count = 0
-        while retry_count < max_retry:
-            if self.isOpen() and self.isWritable():
-                self.write(data)
-                if not self.waitForBytesWritten(1000):
-                    retry_count += 1
-                    continue
-                return True
-            else:
-                self.clearError()
-                self.open(QIODevice.ReadWrite)
-                retry_count += 1
-        return False
+# print(":::", res.content)
 
-    def receiveWithTimeout(self, max_timeout: int):
-        self.clearError()
-        received_data = QByteArray()
-        start_time = QTime.currentTime()
-        while self.isOpen() and self.isReadable():
-            if self.waitForReadyRead(1000):
-                received_data += self.readAll()
-            elapsed_time = start_time.msecsTo(QTime.currentTime())
-            if elapsed_time >= max_timeout:
-                break
-        return received_data
-
-serial_port = SerialPort()
-serial_port.setPortName("COM1")
-serial_port.setBaudRate(QSerialPort.Baud115200)
-serial_port.setDataBits(QSerialPort.Data8)
-serial_port.setParity(QSerialPort.NoParity)
-serial_port.setStopBits(QSerialPort.OneStop)
-
-if serial_port.open(QIODevice.ReadWrite):
-    data = QByteArray(b'Hello, world!')
-    if serial_port.sendWithRetry(data, 3):
-        received_data = serial_port.receiveWithTimeout(1000)
-        print(received_data)
-    serial_port.close()
-
-
+with open("美女视频.mp4", "wb") as file:
+    file.write(res.content)

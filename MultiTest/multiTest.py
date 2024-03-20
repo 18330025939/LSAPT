@@ -103,13 +103,10 @@ class MultiTestWindow(QWidget):
                 return False
 
     def handle_test_result(self, message):
-        # received_data = f'Received data: {message}'
-        # self.test_progress_log.add_data('Received data:')
-        # self.test_progress_log.add_data(message)
+        # first_index = message.index('\r\n')
+        # last_index = message.rindex('\r\n')
         lines = message.split('\r\n')
-        lines.pop()
         for line in lines:
-            # line = line.strip()
             if line:
                 self.ui.editTestInfor.append(line)
 
@@ -126,7 +123,7 @@ class MultiTestWindow(QWidget):
             self.testTable.set_item(self.current_row, self.testTable_header.index('Msg'), self.test_passed)
             self.testTable.set_row_background(self.current_row, Qt.green)
             self.ui.labelPassNumber.setText(str(int(self.ui.labelPassNumber.text()) + 1))
-        elif 'Timeout' in message:
+        elif 'timeout' in message:
             self.testTable.set_item(self.current_row, self.testTable_header.index('Result'), "Timeout")
             self.testTable.set_row_background(self.current_row, QColor("red"))
             self.ui.labelFailNumber.setText(str(int(self.ui.labelFailNumber.text()) + 1))
@@ -140,7 +137,6 @@ class MultiTestWindow(QWidget):
         self.test_progress_log.add_data('Received data:')
         self.test_progress_log.add_data(message)
         # self.handle_event.set()
-
 
     def thread_function(self):
         while self.running:
@@ -161,18 +157,17 @@ class MultiTestWindow(QWidget):
             self.testTable.set_item(self.current_row, self.testTable_header.index('Date'), current_date)
             current_time = datetime.datetime.now().time().strftime('%H:%M:%S')
             self.testTable.set_item(self.current_row, self.testTable_header.index('StartTime'), current_time)
-            self.handle_event.clear()
+            # self.handle_event.clear()
             # 先不考虑多行的测试指令
-            self.serial.send_command(self.test_instr, self.test_timeout)
-            # self.serial.send_command(self.test_instr)
-            self.handle_event.wait()
-            self.handle_test_result(self.serial_data)
-            UI.logger.log_debug('handle-event wait')
-            self.current_row += 1
+            # self.serial.send_command(self.test_instr, self.test_timeout)
+            if self.serial.send_command(self.test_instr):
+                received_data = self.serial.receive_timeout()
+            # self.handle_event.wait()
+            # self.handle_test_result(self.serial_data)
 
-    # def command_timeout(self):
-    #     print('timeout')
-    #     self.timer.stop()
+                self.handle_test_result(received_data)
+            # UI.logger.log_debug('handle-event wait')
+            self.current_row += 1
 
     def set_sid_pid(self):
         self.ui.editSID.clear()
@@ -357,7 +352,7 @@ class MultiTestWindow(QWidget):
         baud_rate = self.ui.boxBaudSelect.currentText()
 
         if self.serial.open(port_name, baud_rate) is True:
-            self.serial.data_received.connect(self.handle_serial_data)
+            # self.serial.data_received.connect(self.handle_serial_data)
             # self.notify_signal.connect(self.handle_test_result)
             self.serial_link = True
             mes_box = QMessageBox()
@@ -381,9 +376,9 @@ class MultiTestWindow(QWidget):
         mes_box.setWindowTitle('提示')
         mes_box.exec_()
 
-    def handle_serial_data(self, data):
-        index = data.find('\r\n')
-        if index != -1:
-            self.serial_data = data[index + 2:]
-        self.handle_event.set()
+    # def handle_serial_data(self, data):
+    #     index = data.find('\r\n')
+    #     if index != -1:
+    #         self.serial_data = data[index + 2:]
+    #     self.handle_event.set()
         # self.notify_signal.emit(data)
