@@ -1,6 +1,6 @@
 import re
 
-from PyQt5.QtCore import QObject, pyqtSignal, QTimer, pyqtSlot, QByteArray, QIODevice, QTime
+from PyQt5.QtCore import QObject, pyqtSignal, QTimer, pyqtSlot, QByteArray, QIODevice, QTime, qAbs
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 from Lib.ui import UI
 import time
@@ -66,23 +66,33 @@ class SerialPort(QObject):
     #             self.start_time = QTime.currentTime()
     #             self.timeout = timeout
 
-    def send_command(self, command, max_retry=3):
+    def send_command(self, command_data, max_retry=3):
         self.serial_port.clearError()
-        retry_count = 0
-        data = command + '\n'
-        byte_array = data.encode()
-        while retry_count < max_retry:
-            if self.serial_port.isOpen() and self.serial_port.isWritable():
-                self.serial_port.write(byte_array)
-                if not self.serial_port.waitForBytesWritten():
+        # data = command + '\n'
+        # print(type(command_data),command_data)
+        commands = command_data.split('\\n')
+        for cmd in commands:
+            retry_count = 0
+            cmd = cmd.strip()
+            while retry_count < max_retry:
+                if self.serial_port.isOpen() and self.serial_port.isWritable():
+                    self.serial_port.write(cmd.encode())
+                    self.serial_port.write("\n".encode())
+                    if not self.serial_port.waitForBytesWritten():
+                        retry_count += 1
+                        continue
+                    else:
+                        break
+                else:
+                    self.serial_port.clearError()
+                    self.serial_port.open(QIODevice.ReadWrite)
                     retry_count += 1
-                    continue
-                return True
-            else:
-                self.serial_port.clearError()
-                self.serial_port.open(QIODevice.ReadWrite)
-                retry_count += 1
-        return False
+            self.serial_port.flush()
+
+            if retry_count >= max_retry:
+                return False
+
+        return True
 
     # def command_timeout_handler(self):
     #     self.timer.stop()
@@ -108,22 +118,27 @@ class SerialPort(QObject):
         ansi_escape = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
         return ansi_escape.sub('', string)
 
-    def receive_timeout(self, timeout=1000):
+    def receive_timeout(self, timeout=10000):
         self.serial_port.clearError()
         self.buffer = b''
         start_time = QTime.currentTime()
+
         while self.serial_port.isOpen():
             self.serial_port.waitForReadyRead(10)
             if self.serial_port.bytesAvailable() > 0:
                 self.buffer += self.serial_port.readAll().data()
 
-            elapsed_time = start_time.msecsTo(QTime.currentTime())
-            if b'\r\n[root' in self.buffer and b']#' in self.buffer:
+            current_time = QTime.currentTime()
+            elapsed_time = qAbs(current_time.msecsTo(start_time))
+
+            # if b'\r\n[root' in self.buffer and b']#' in self.buffer:
+            if b'\r' in self.buffer and b'#' in self.buffer:
                 UI.logger.log_debug('Serial receive data: %s', self.buffer)
                 break
 
-            if elapsed_time > timeout and self.buffer == b'':
+            if elapsed_time > timeout:
                 self.buffer = b'timeout'
+                UI.logger.log_debug('Serial receive timeout')
                 break
 
         return self.remove_ansi_color(self.buffer.decode())

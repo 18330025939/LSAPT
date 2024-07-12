@@ -20,6 +20,7 @@ if __name__ == '__main__':
 
     sys.exit(app.exec())
 
+
 # pyinstaller --paths /usr/local/lib/python3.8/dist-packages/PyQt5/Qt5/ -F -w --onefile main.py
 # pyrcc5 -o icons_rc.py icons/icons.qrc
 # pyrcc5 -o images_rc.py images/images.qrc

@@ -124,7 +124,8 @@ class MultiTestWindow(QWidget):
             self.testTable.set_row_background(self.current_row, Qt.green)
             self.ui.labelPassNumber.setText(str(int(self.ui.labelPassNumber.text()) + 1))
         elif 'timeout' in message:
-            self.testTable.set_item(self.current_row, self.testTable_header.index('Result'), "Timeout")
+            self.testTable.set_item(self.current_row, self.testTable_header.index('Result'), "Failed")
+            self.testTable.set_item(self.current_row, self.testTable_header.index('Msg'), 'timeout')
             self.testTable.set_row_background(self.current_row, QColor("red"))
             self.ui.labelFailNumber.setText(str(int(self.ui.labelFailNumber.text()) + 1))
         else:
@@ -133,6 +134,7 @@ class MultiTestWindow(QWidget):
             self.testTable.set_row_background(self.current_row, QColor("red"))
             self.ui.labelFailNumber.setText(str(int(self.ui.labelFailNumber.text()) + 1))
 
+        self.testTable.repaint()
         self.ui.labelTotalNumber.setText(str(int(self.ui.labelTotalNumber.text()) + 1))
         self.test_progress_log.add_data('Received data:')
         self.test_progress_log.add_data(message)
@@ -161,7 +163,9 @@ class MultiTestWindow(QWidget):
             # 先不考虑多行的测试指令
             # self.serial.send_command(self.test_instr, self.test_timeout)
             if self.serial.send_command(self.test_instr):
-                received_data = self.serial.receive_timeout()
+                self.test_progress_log.add_data('Sent data:')
+                self.test_progress_log.add_data(self.test_instr)
+                received_data = self.serial.receive_timeout(int(self.test_timeout)*1000)
             # self.handle_event.wait()
             # self.handle_test_result(self.serial_data)
 
@@ -240,8 +244,8 @@ class MultiTestWindow(QWidget):
             for key, value in data.items():
                 if key == UI.configWin.get_test_instr_object_name():
                     self.test_instr = value
-                    self.test_progress_log.add_data('Sent data:')
-                    self.test_progress_log.add_data(value)
+                    # self.test_progress_log.add_data('Sent data:')
+                    # self.test_progress_log.add_data(value)
                 elif key == UI.configWin.get_show_info_object_name():
                     self.show_info = value
                 elif key == UI.configWin.get_test_pass_object_name():
